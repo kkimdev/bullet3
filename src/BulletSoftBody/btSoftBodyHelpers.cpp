@@ -194,7 +194,8 @@ void			btSoftBodyHelpers::Draw(	btSoftBody* psb,
 				int count = vertices.size();
 				btScalar shrink=0.f;
 				btScalar shrinkClamp=0.f;
-				computer.compute(&vertices[0].getX(),stride,count,shrink,shrinkClamp);
+				// TODO
+				// computer.compute(&vertices[0].getX(),stride,count,shrink,shrinkClamp);
 				for (int i=0;i<computer.faces.size();i++)
 				{
 

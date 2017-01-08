@@ -71,9 +71,9 @@ TEST(InvDynCompare, bulletUrdfR2D2) {
 
     for (int loop = 0; loop < kNLoops; loop++) {
         for (int i = 0; i < q.size(); i++) {
-            q(i) = b3RandRange(-B3_PI, B3_PI);
-            u(i) = b3RandRange(-B3_PI, B3_PI);
-            dot_u(i) = b3RandRange(-B3_PI, B3_PI);
+            q(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
+            u(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
+            dot_u(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
         }
 
         double pos_error;

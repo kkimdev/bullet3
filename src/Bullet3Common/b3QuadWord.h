@@ -69,11 +69,15 @@ public:
 	}
 #else
 public:
-	union
-	{
+	// union
+	// {
 		b3Scalar	m_floats[4];
-		struct {b3Scalar x,y,z,w;};
-	};
+		// struct {b3Scalar x,y,z,w;};
+		b3Scalar x;
+		b3Scalar y;
+		b3Scalar z;
+		b3Scalar w;
+	// };
 #endif // B3_USE_SSE
 
 #endif //__CELLOS_LV2__ __SPU__

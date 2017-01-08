@@ -168,8 +168,10 @@ void			btRigidBody::applyDamping(btScalar timeStep)
 	m_linearVelocity *= GEN_clamped((btScalar(1.) - timeStep * m_linearDamping), (btScalar)btScalar(0.0), (btScalar)btScalar(1.0));
 	m_angularVelocity *= GEN_clamped((btScalar(1.) - timeStep * m_angularDamping), (btScalar)btScalar(0.0), (btScalar)btScalar(1.0));
 #else
-	m_linearVelocity *= btPow(btScalar(1)-m_linearDamping, timeStep);
-	m_angularVelocity *= btPow(btScalar(1)-m_angularDamping, timeStep);
+	m_linearVelocity *= btPow(btScalar(1.)-m_linearDamping, timeStep);
+	btScalar x1 = btScalar(1.)-m_angularDamping;
+	btScalar x2 = btPow(x1, timeStep);
+	m_angularVelocity *= x2;
 #endif
 
 	if (m_additionalDamping)
@@ -489,7 +491,7 @@ const char*	btRigidBody::serialize(void* dataBuffer, class btSerializer* seriali
 	m_invInertiaTensorWorld.serialize(rbd->m_invInertiaTensorWorld);
 	m_linearVelocity.serialize(rbd->m_linearVelocity);
 	m_angularVelocity.serialize(rbd->m_angularVelocity);
-	rbd->m_inverseMass = m_inverseMass;
+	rbd->m_inverseMass = (float) m_inverseMass;
 	m_angularFactor.serialize(rbd->m_angularFactor);
 	m_linearFactor.serialize(rbd->m_linearFactor);
 	m_gravity.serialize(rbd->m_gravity);
@@ -497,15 +499,15 @@ const char*	btRigidBody::serialize(void* dataBuffer, class btSerializer* seriali
 	m_invInertiaLocal.serialize(rbd->m_invInertiaLocal);
 	m_totalForce.serialize(rbd->m_totalForce);
 	m_totalTorque.serialize(rbd->m_totalTorque);
-	rbd->m_linearDamping = m_linearDamping;
-	rbd->m_angularDamping = m_angularDamping;
+	rbd->m_linearDamping = (float) m_linearDamping;
+	rbd->m_angularDamping = (float) m_angularDamping;
 	rbd->m_additionalDamping = m_additionalDamping;
-	rbd->m_additionalDampingFactor = m_additionalDampingFactor;
-	rbd->m_additionalLinearDampingThresholdSqr = m_additionalLinearDampingThresholdSqr;
-	rbd->m_additionalAngularDampingThresholdSqr = m_additionalAngularDampingThresholdSqr;
-	rbd->m_additionalAngularDampingFactor = m_additionalAngularDampingFactor;
-	rbd->m_linearSleepingThreshold=m_linearSleepingThreshold;
-	rbd->m_angularSleepingThreshold = m_angularSleepingThreshold;
+	rbd->m_additionalDampingFactor = (float) m_additionalDampingFactor;
+	rbd->m_additionalLinearDampingThresholdSqr = (float) m_additionalLinearDampingThresholdSqr;
+	rbd->m_additionalAngularDampingThresholdSqr = (float) m_additionalAngularDampingThresholdSqr;
+	rbd->m_additionalAngularDampingFactor = (float) m_additionalAngularDampingFactor;
+	rbd->m_linearSleepingThreshold=(float) m_linearSleepingThreshold;
+	rbd->m_angularSleepingThreshold = (float) m_angularSleepingThreshold;
 
 	return btRigidBodyDataName;
 }

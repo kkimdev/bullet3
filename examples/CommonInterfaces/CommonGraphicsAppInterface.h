@@ -212,7 +212,7 @@ struct CommonGraphicsApp
 				camera->setCameraDistance(cameraDistance);
 				camera->setCameraPitch(pitch);
 				camera->setCameraYaw(yaw);
-				camera->setCameraTargetPosition(cameraTargetPosition[0],cameraTargetPosition[1],cameraTargetPosition[2]);
+				camera->setCameraTargetPosition((float)cameraTargetPosition[0],(float)cameraTargetPosition[1],(float)cameraTargetPosition[2]);
 				
 			}	
 
@@ -234,8 +234,8 @@ struct CommonGraphicsApp
 			cameraUp[getUpAxis()] = 1;
 			CommonCameraInterface* camera = m_renderer->getActiveCamera();
 			
-			camera->getCameraPosition(cameraPosition);
-			camera->getCameraTargetPosition(cameraTargetPosition);
+			// camera->getCameraPosition(cameraPosition);
+			// camera->getCameraTargetPosition(cameraTargetPosition);
 			
 			if (!m_leftMouseButton)
 			{
@@ -271,7 +271,7 @@ struct CommonGraphicsApp
 				}
 			}
 
-			camera->setCameraTargetPosition(cameraTargetPosition[0],cameraTargetPosition[1],cameraTargetPosition[2]);
+			camera->setCameraTargetPosition((float)cameraTargetPosition[0],(float)cameraTargetPosition[1],(float)cameraTargetPosition[2]);
 		}
 
 	}

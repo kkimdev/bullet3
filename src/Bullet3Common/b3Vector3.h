@@ -100,11 +100,15 @@ public:
 
         };
 #else
-	union
-	{
-        	float	m_floats[4];
-			struct {float	x,y,z,w;};
-	};
+	// union 
+	// {
+        	b3Scalar	m_floats[4];
+			// struct {b3Scalar	x,y,z,w;} ;
+			b3Scalar x;
+			b3Scalar y;
+			b3Scalar z;
+			b3Scalar w;
+	// };
 #endif
 
 
@@ -1246,12 +1250,12 @@ B3_FORCE_INLINE void b3PlaneSpace1 (const T& n, T& p, T& q)
 
 struct	b3Vector3FloatData
 {
-	float	m_floats[4];
+	b3Scalar	m_floats[4];
 };
 
 struct	b3Vector3DoubleData
 {
-	double	m_floats[4];
+	b3Scalar	m_floats[4];
 
 };
 

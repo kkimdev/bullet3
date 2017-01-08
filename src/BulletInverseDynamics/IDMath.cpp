@@ -7,7 +7,7 @@ namespace btInverseDynamics {
 static const idScalar kIsZero = 5 * std::numeric_limits<idScalar>::epsilon();
 // requirements for axis length deviation from 1.0
 // experimentally set from random euler angle rotation matrices
-static const idScalar kAxisLengthEpsilon = 10 * kIsZero;
+static const idScalar kAxisLengthEpsilon = idScalar(10) * kIsZero;
 
 void setZero(vec3 &v) {
 	v(0) = 0;

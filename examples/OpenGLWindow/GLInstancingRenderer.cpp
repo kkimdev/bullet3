@@ -1410,26 +1410,26 @@ static void    b3CreateLookAt(const b3Vector3& eye, const b3Vector3& center,cons
     b3Vector3 s = (f.cross(u)).normalized();
     u = s.cross(f);
 
-    result[0*4+0] = s.x;
-    result[1*4+0] = s.y;
-    result[2*4+0] = s.z;
+    // result[0*4+0] = s.x;
+    // result[1*4+0] = s.y;
+    // result[2*4+0] = s.z;
 
-	result[0*4+1] = u.x;
-    result[1*4+1] = u.y;
-    result[2*4+1] = u.z;
+	// result[0*4+1] = u.x;
+    // result[1*4+1] = u.y;
+    // result[2*4+1] = u.z;
 
-    result[0*4+2] =-f.x;
-    result[1*4+2] =-f.y;
-    result[2*4+2] =-f.z;
+    // result[0*4+2] =-f.x;
+    // result[1*4+2] =-f.y;
+    // result[2*4+2] =-f.z;
 
-	result[0*4+3] = 0.f;
-    result[1*4+3] = 0.f;
-    result[2*4+3] = 0.f;
+	// result[0*4+3] = 0.f;
+    // result[1*4+3] = 0.f;
+    // result[2*4+3] = 0.f;
 
-    result[3*4+0] = -s.dot(eye);
-    result[3*4+1] = -u.dot(eye);
-    result[3*4+2] = f.dot(eye);
-    result[3*4+3] = 1.f;
+    // result[3*4+0] = -s.dot(eye);
+    // result[3*4+1] = -u.dot(eye);
+    // result[3*4+2] = f.dot(eye);
+    // result[3*4+3] = 1.f;
 }
 
 
@@ -1722,7 +1722,7 @@ b3Assert(glGetError() ==GL_NO_ERROR);
 							
 							b3Vector3 gLightDir = gLightPos;
 							gLightDir.normalize();
-							glUniform3f(regularLightDirIn,gLightDir[0],gLightDir[1],gLightDir[2]);
+							// glUniform3f(regularLightDirIn,gLightDir[0],gLightDir[1],gLightDir[2]);
 
 							glUniform1i(uniform_texture_diffuse, 0);
 							glDrawElementsInstanced(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, indexOffset, gfxObj->m_numGraphicsInstances);
@@ -1759,7 +1759,7 @@ b3Assert(glGetError() ==GL_NO_ERROR);
 							glUniformMatrix4fv(useShadow_MVP, 1, false, &MVP[0]);
 							b3Vector3 gLightDir = gLightPos;
 							gLightDir.normalize();
-							glUniform3f(useShadow_lightDirIn,gLightDir[0],gLightDir[1],gLightDir[2]);
+							// glUniform3f(useShadow_lightDirIn,gLightDir[0],gLightDir[1],gLightDir[2]);
 							glUniformMatrix4fv(useShadow_DepthBiasModelViewMatrix, 1, false, &depthBiasMVP[0][0]);
 							glActiveTexture(GL_TEXTURE1);
 							glBindTexture(GL_TEXTURE_2D, m_data->m_shadowTexture);

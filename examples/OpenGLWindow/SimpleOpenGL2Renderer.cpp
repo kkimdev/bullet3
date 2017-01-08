@@ -123,10 +123,10 @@ void SimpleOpenGL2Renderer::drawLines(const float* positions, const float color[
         b3Vector3 to= b3MakeVector3(positions[index1*pointStrideInFloats],positions[index1*pointStrideInFloats+1],positions[index1*pointStrideInFloats+2]);
         
         glBegin(GL_LINES);
-        glColor3f(fromColor.getX(), fromColor.getY(), fromColor.getZ());
-        glVertex3d(from.getX(), from.getY(), from.getZ());
-        glColor3f(toColor.getX(), toColor.getY(), toColor.getZ());
-        glVertex3d(to.getX(), to.getY(), to.getZ());
+        // glColor3f(fromColor.getX(), fromColor.getY(), fromColor.getZ());
+        // glVertex3d(from.getX(), from.getY(), from.getZ());
+        // glColor3f(toColor.getX(), toColor.getY(), toColor.getZ());
+        // glVertex3d(to.getX(), to.getY(), to.getZ());
         glEnd();
         
     }

@@ -38,7 +38,7 @@ B3_ATTRIBUTE_ALIGNED16(struct) b3Contact4 : public b3Contact4Data
 	//float& getNPoints() { return m_worldNormal[3]; }
 	int getNPoints() const { return (int) m_worldNormalOnB.w; }
 
-	float getPenetration(int idx) const { return m_worldPosB[idx].w; }
+	float getPenetration(int idx) const { return (float) m_worldPosB[idx].w; }
 
 	bool isInvalid() const { return (getBodyA()==0 || getBodyB()==0); }
 };

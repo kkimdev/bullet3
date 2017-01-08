@@ -28,6 +28,8 @@ subject to the following restrictions:
 #include <stdlib.h>//size_t for MSVC 6.0
 #include <float.h>
 
+#include "../../kklautodiff/src/kklautodiff.hpp"
+
 //Original repository is at http://github.com/erwincoumans/bullet3
 #define B3_BULLET_VERSION 300
 
@@ -254,16 +256,17 @@ inline int	b3GetVersion()
 
 ///The b3Scalar type abstracts floating point numbers, to easily switch between double and single floating point precision.
 #if defined(B3_USE_DOUBLE_PRECISION)
-typedef double b3Scalar;
+typedef kklautodiff::RealNumber<double> b3Scalar;
 //this number could be bigger in double precision
 #define B3_LARGE_FLOAT 1e30
 #else
-typedef float b3Scalar;
+typedef kklautodiff::RealNumber<float> b3Scalar;
 //keep B3_LARGE_FLOAT*B3_LARGE_FLOAT < FLT_MAX
 #define B3_LARGE_FLOAT 1e18f
 #endif
 
 #ifdef B3_USE_SSE
+#error KKIM no SSE
 typedef __m128 b3SimdFloat4;
 #endif//B3_USE_SSE
 
@@ -314,6 +317,7 @@ inline __m128 operator * (const __m128 A, const __m128 B)
 #endif //B3_USE_SSE_IN_API
 
 #ifdef B3_USE_NEON
+#error KKIM no NEON
 #include <arm_neon.h>
 
 typedef float32x4_t b3SimdFloat4;
@@ -355,10 +359,11 @@ B3_FORCE_INLINE b3Scalar b3Pow(b3Scalar x,b3Scalar y) { return pow(x,y); }
 B3_FORCE_INLINE b3Scalar b3Fmod(b3Scalar x,b3Scalar y) { return fmod(x,y); }
 
 #else
-		
+#error use B3_FORCE_DOUBLE_FUNCTIONS
 B3_FORCE_INLINE b3Scalar b3Sqrt(b3Scalar y) 
 { 
 #ifdef USE_APPROXIMATION
+#error KKIM no custom b3Sqrt.
     double x, z, tempf;
     unsigned long *tfptr = ((unsigned long *)&tempf) + 1;
 

@@ -21,7 +21,7 @@ inline void integrateSingleTransform( __global b3RigidBodyData_t* bodies,int nod
 			
 			b3Float4 angvel = bodies[nodeID].m_angVel;
 
-			float fAngle = b3Sqrt(b3Dot3F4(angvel, angvel));
+			float fAngle = (float) b3Sqrt(b3Dot3F4(angvel, angvel));
 			
 			//limit the angular motion
 			if(fAngle*timeStep > BT_GPU_ANGULAR_MOTION_THRESHOLD)
@@ -74,7 +74,7 @@ inline void b3IntegrateTransform( __global b3RigidBodyData_t* body, float timeSt
 			body->m_angVel.z *= angularDamping;
 			
 			b3Float4 angvel = body->m_angVel;
-			float fAngle = b3Sqrt(b3Dot3F4(angvel, angvel));
+			float fAngle = (float) b3Sqrt(b3Dot3F4(angvel, angvel));
 			//limit the angular motion
 			if(fAngle*timeStep > BT_GPU_ANGULAR_MOTION_THRESHOLD)
 			{

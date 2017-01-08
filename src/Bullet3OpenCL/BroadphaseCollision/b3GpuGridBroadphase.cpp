@@ -52,9 +52,9 @@ m_paramsGPU(ctx,q)
 	m_paramsCPU.m_gridSize[2] = 128;
 	m_paramsCPU.m_gridSize[3] = maxBodiesPerCell;
 	m_paramsCPU.setMaxBodiesPerCell(maxBodiesPerCell);
-	m_paramsCPU.m_invCellSize[0] = invGridSize[0];
-	m_paramsCPU.m_invCellSize[1] = invGridSize[1];
-	m_paramsCPU.m_invCellSize[2] = invGridSize[2];
+	m_paramsCPU.m_invCellSize[0] = (float) invGridSize[0];
+	m_paramsCPU.m_invCellSize[1] = (float) invGridSize[1];
+	m_paramsCPU.m_invCellSize[2] = (float) invGridSize[2];
 	m_paramsCPU.m_invCellSize[3] = 0.f;
 	m_paramsGPU.push_back(m_paramsCPU);
 

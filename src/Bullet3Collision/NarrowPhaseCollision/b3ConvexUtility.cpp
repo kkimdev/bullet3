@@ -34,7 +34,8 @@ bool	b3ConvexUtility::initializePolyhedralFeatures(const b3Vector3* orgVertices,
 	
 
 	b3ConvexHullComputer conv;
-	conv.compute(&orgVertices[0].getX(), sizeof(b3Vector3),numPoints,0.f,0.f);
+	// TODO: make this work.
+	// conv.compute(&orgVertices[0].getX(), sizeof(b3Vector3),numPoints,b3Scalar(0.f),b3Scalar(0.f));
 
 	b3AlignedObjectArray<b3Vector3> faceNormals;
 	int numFaces = conv.faces.size();
@@ -271,7 +272,7 @@ bool	b3ConvexUtility::initializePolyhedralFeatures(const b3Vector3* orgVertices,
 
 inline bool IsAlmostZero(const b3Vector3& v)
 {
-	if(fabsf(v.getX())>1e-6 || fabsf(v.getY())>1e-6 || fabsf(v.getZ())>1e-6)	return false;
+	if(fabs(v.getX())>1e-6 || fabs(v.getY())>1e-6 || fabs(v.getZ())>1e-6)	return false;
 	return true;
 }
 

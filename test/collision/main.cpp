@@ -228,11 +228,11 @@ void testSphereSphereDistance(SphereSphereTestMethod method, btScalar abs_error)
                                distInfo.m_pointOnB[0],distInfo.m_pointOnB[1],distInfo.m_pointOnB[2]);
 #endif
                         ASSERT_EQ(0,result);
-                        ASSERT_NEAR(btFabs(btScalar(i-z))-btScalar(j)-ssd.m_radiusB, distInfo.m_distance, abs_error);
+                        ASSERT_NEAR((double) (btFabs(btScalar(i-z))-btScalar(j)-ssd.m_radiusB), (double) distInfo.m_distance, (double) abs_error);
                         btVector3 computedA = distInfo.m_pointOnB+distInfo.m_distance*distInfo.m_normalBtoA;
-                        ASSERT_NEAR(computedA.x(),distInfo.m_pointOnA.x(),abs_error);
-                        ASSERT_NEAR(computedA.y(),distInfo.m_pointOnA.y(),abs_error);
-                        ASSERT_NEAR(computedA.z(),distInfo.m_pointOnA.z(),abs_error);
+                        ASSERT_NEAR((double) computedA.x(),(double) distInfo.m_pointOnA.x(),(double) abs_error);
+                        ASSERT_NEAR((double) computedA.y(),(double) distInfo.m_pointOnA.y(),(double) abs_error);
+                        ASSERT_NEAR((double) computedA.z(),(double) distInfo.m_pointOnA.z(),(double) abs_error);
                     }
                 }
             }

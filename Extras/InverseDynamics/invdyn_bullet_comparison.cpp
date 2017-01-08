@@ -288,12 +288,12 @@ int compareInverseAndForwardDynamics(vecx &q, vecx &u, vecx &dot_u, btVector3 &g
                    diff_basis(1, 2), diff_basis(2, 0), diff_basis(2, 1), diff_basis(2, 2));
         }
         double total_pos_err =
-            BT_ID_SQRT(BT_ID_POW(diff_com(0), 2) + BT_ID_POW(diff_com(1), 2) +
-                       BT_ID_POW(diff_com(2), 2) + BT_ID_POW(diff_basis(0, 0), 2) +
-                       BT_ID_POW(diff_basis(0, 1), 2) + BT_ID_POW(diff_basis(0, 2), 2) +
-                       BT_ID_POW(diff_basis(1, 0), 2) + BT_ID_POW(diff_basis(1, 1), 2) +
-                       BT_ID_POW(diff_basis(1, 2), 2) + BT_ID_POW(diff_basis(2, 0), 2) +
-                       BT_ID_POW(diff_basis(2, 1), 2) + BT_ID_POW(diff_basis(2, 2), 2));
+            std::sqrt(std::pow(diff_com(0), 2) + std::pow(diff_com(1), 2) +
+                      std::pow(diff_com(2), 2) + std::pow(diff_basis(0, 0), 2) +
+                      std::pow(diff_basis(0, 1), 2) + std::pow(diff_basis(0, 2), 2) +
+                      std::pow(diff_basis(1, 0), 2) + std::pow(diff_basis(1, 1), 2) +
+                      std::pow(diff_basis(1, 2), 2) + std::pow(diff_basis(2, 0), 2) +
+                      std::pow(diff_basis(2, 1), 2) + std::pow(diff_basis(2, 2), 2));
         if (verbose) {
             printf("======kin-pos-err: %e\n", total_pos_err);
         }

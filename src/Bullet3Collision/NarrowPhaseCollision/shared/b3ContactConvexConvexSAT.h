@@ -33,13 +33,13 @@ inline int b3ClipFace(const b3Float4* pVtxIn, int numVertsIn, b3Float4& planeNor
 	b3Float4 firstVertex=pVtxIn[numVertsIn-1];
 	b3Float4 endVertex = pVtxIn[0];
 	
-	ds = b3Dot3F4(planeNormalWS,firstVertex)+planeEqWS;
+	ds = (float) b3Dot3F4(planeNormalWS,firstVertex)+planeEqWS;
 
 	for (ve = 0; ve < numVertsIn; ve++)
 	{
 		endVertex=pVtxIn[ve];
 
-		de = b3Dot3F4(planeNormalWS,endVertex)+planeEqWS;
+		de = (float) b3Dot3F4(planeNormalWS,endVertex)+planeEqWS;
 
 		if (ds<0)
 		{
@@ -98,7 +98,7 @@ inline int b3ClipFaceAgainstHull(const b3Float4& separatingNormal, const b3Conve
 				facesA[hullA->m_faceOffset+face].m_plane.z,0.f);
 			const b3Float4 faceANormalWS = b3QuatRotate(ornA,Normal);
 		
-			float d = b3Dot3F4(faceANormalWS,separatingNormal);
+			float d = (float) b3Dot3F4(faceANormalWS,separatingNormal);
 			if (d < dmin)
 			{
 				dmin = d;
@@ -125,7 +125,7 @@ inline int b3ClipFaceAgainstHull(const b3Float4& separatingNormal, const b3Conve
 
 		b3Float4 planeNormalWS1 = -b3Cross3(WorldEdge0,worldPlaneAnormal1);
 		b3Float4 worldA1 = b3TransformPoint(a,posA,ornA);
-		float planeEqWS1 = -b3Dot3F4(worldA1,planeNormalWS1);
+		float planeEqWS1 = -(float) b3Dot3F4(worldA1,planeNormalWS1);
 		
 		b3Float4 planeNormalWS = planeNormalWS1;
 		float planeEqWS=planeEqWS1;
@@ -146,12 +146,12 @@ inline int b3ClipFaceAgainstHull(const b3Float4& separatingNormal, const b3Conve
 	// only keep points that are behind the witness face
 	{
 		b3Float4 localPlaneNormal  = b3MakeFloat4(polyA.m_plane.x,polyA.m_plane.y,polyA.m_plane.z,0.f);
-		float localPlaneEq = polyA.m_plane.w;
+		float localPlaneEq = (float) polyA.m_plane.w;
 		b3Float4 planeNormalWS = b3QuatRotate(ornA,localPlaneNormal);
-		float planeEqWS=localPlaneEq-b3Dot3F4(planeNormalWS,posA);
+		float planeEqWS=localPlaneEq-(float) b3Dot3F4(planeNormalWS,posA);
 		for (int i=0;i<numVertsIn;i++)
 		{
-			float depth = b3Dot3F4(planeNormalWS,pVtxIn[i])+planeEqWS;
+			float depth = (float) b3Dot3F4(planeNormalWS,pVtxIn[i])+planeEqWS;
 			if (depth <=minDist)
 			{
 				depth = minDist;
@@ -230,7 +230,7 @@ inline int	b3ClipHullAgainstHull(const b3Float4& separatingNormal,
 				if (once)
 					printf("faceNormal = %f,%f,%f\n",Normal.x,Normal.y,Normal.z);
 #endif
-				float d = b3Dot3F4(WorldNormal,separatingNormal);
+				float d = (float) b3Dot3F4(WorldNormal,separatingNormal);
 				if (d > dmax)
 				{
 					dmax = d;
@@ -359,7 +359,7 @@ inline int b3ClipHullHullSingle(
 								(b3Float4&)trA.getOrigin(), (b3Quaternion&)trAorn,
 								(b3Float4&)trB.getOrigin(), (b3Quaternion&)trBorn,
 								worldVertsB1,worldVertsB2,capacityWorldVerts,
-								minDist, maxDist,
+								(float) minDist,(float)  maxDist,
 								verticesA,	facesA,indicesA,
 								verticesB,	facesB,indicesB,
 								

@@ -170,8 +170,8 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 			{
 				btScalar rhs = m_allConstraintPtrArray[i]->m_rhs;
 				btScalar rhsPenetration = m_allConstraintPtrArray[i]->m_rhsPenetration;
-				m_b[i]=rhs/jacDiag;
-				m_bSplit[i] = rhsPenetration/jacDiag;
+				m_b[i]=(float) (rhs/jacDiag);
+				m_bSplit[i] = (float) (rhsPenetration/jacDiag);
 			}
 
 		}
@@ -194,8 +194,8 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 				m_hi[i] = BT_INFINITY;
 			} else
 			{
-				m_lo[i] = m_allConstraintPtrArray[i]->m_lowerLimit;
-				m_hi[i] = m_allConstraintPtrArray[i]->m_upperLimit;
+				m_lo[i] = (float) m_allConstraintPtrArray[i]->m_lowerLimit;
+				m_hi[i] = (float) m_allConstraintPtrArray[i]->m_upperLimit;
 			}
 		}
 	}
@@ -272,10 +272,10 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 
 					for (int r=0;r<3;r++)
 					{
-						J3.setElem(cur,r,m_allConstraintPtrArray[i+row]->m_contactNormal1[r]);
-						J3.setElem(cur,r+4,m_allConstraintPtrArray[i+row]->m_relpos1CrossNormal[r]);
-						JinvM3.setElem(cur,r,normalInvMass[r]);
-						JinvM3.setElem(cur,r+4,relPosCrossNormalInvInertia[r]);
+						J3.setElem(cur,r,(float) m_allConstraintPtrArray[i+row]->m_contactNormal1[r]);
+						J3.setElem(cur,r+4,(float) m_allConstraintPtrArray[i+row]->m_relpos1CrossNormal[r]);
+						JinvM3.setElem(cur,r,(float) normalInvMass[r]);
+						JinvM3.setElem(cur,r+4,(float) relPosCrossNormalInvInertia[r]);
 					}
 					J3.setElem(cur,3,0);
 					JinvM3.setElem(cur,3,0);
@@ -309,10 +309,10 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 
 					for (int r=0;r<3;r++)
 					{
-						J3.setElem(cur,r,m_allConstraintPtrArray[i+row]->m_contactNormal2[r]);
-						J3.setElem(cur,r+4,m_allConstraintPtrArray[i+row]->m_relpos2CrossNormal[r]);
-						JinvM3.setElem(cur,r,normalInvMassB[r]);
-						JinvM3.setElem(cur,r+4,relPosInvInertiaB[r]);
+						J3.setElem(cur,r,(float) m_allConstraintPtrArray[i+row]->m_contactNormal2[r]);
+						J3.setElem(cur,r+4,(float) m_allConstraintPtrArray[i+row]->m_relpos2CrossNormal[r]);
+						JinvM3.setElem(cur,r,(float) normalInvMassB[r]);
+						JinvM3.setElem(cur,r+4,(float) relPosInvInertiaB[r]);
 					}
 					J3.setElem(cur,3,0);
 					JinvM3.setElem(cur,3,0);
@@ -332,9 +332,12 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 
 
 	//compute JinvM = J*invM.
-	const btScalar* JinvM = JinvM3.getBufferPointer();
+	// TODO make it work
+	// const btScalar* JinvM = JinvM3.getBufferPointer();
+	const float* JinvM = JinvM3.getBufferPointer();
 
-	const btScalar* Jptr = J3.getBufferPointer();
+	// const btScalar* Jptr = J3.getBufferPointer();
+	const float* Jptr = J3.getBufferPointer();
 	{
 		BT_PROFILE("m_A.resize");
 		m_A.resize(n,n);
@@ -357,8 +360,10 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 		//	btRigidBody* orgBodyB = m_tmpSolverBodyPool[sbB].m_originalBody;
 
 			numRows = i<m_tmpSolverNonContactConstraintPool.size() ? m_tmpConstraintSizesPool[c].m_numConstraintRows : numContactRows ;
-					
-			const btScalar *JinvMrow = JinvM + 2*8*(size_t)row__;
+
+			// TODO make it work
+			// const btScalar *JinvMrow = JinvM + 2*8*(size_t)row__;		
+			const float *JinvMrow = JinvM + 2*8*(size_t)row__;
 
 			{
 				int startJointNodeA = bodyJointNodeArray[sbA];
@@ -372,8 +377,8 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 						int numRowsOther = cr0 < m_tmpSolverNonContactConstraintPool.size() ? m_tmpConstraintSizesPool[j0].m_numConstraintRows : numContactRows;
 						size_t ofsother = (m_allConstraintPtrArray[cr0]->m_solverBodyIdB == sbA) ? 8*numRowsOther  : 0;
 						//printf("%d joint i %d and j0: %d: ",count++,i,j0);
-						m_A.multiplyAdd2_p8r ( JinvMrow, 
-						Jptr + 2*8*(size_t)ofs[j0] + ofsother, numRows, numRowsOther,  row__,ofs[j0]);
+						// m_A.multiplyAdd2_p8r ( JinvMrow, 
+						// Jptr + 2*8*(size_t)ofs[j0] + ofsother, numRows, numRowsOther,  row__,ofs[j0]);
 					}
 					startJointNodeA = jointNodeArray[startJointNodeA].nextJointNodeIndex;
 				}
@@ -390,8 +395,8 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 					{
 						int numRowsOther =  cj1 < m_tmpSolverNonContactConstraintPool.size() ? m_tmpConstraintSizesPool[j1].m_numConstraintRows : numContactRows;
 						size_t ofsother = (m_allConstraintPtrArray[cj1]->m_solverBodyIdB == sbB) ? 8*numRowsOther  : 0;
-						m_A.multiplyAdd2_p8r ( JinvMrow + 8*(size_t)numRows, 
-						Jptr + 2*8*(size_t)ofs[j1] + ofsother, numRows, numRowsOther, row__,ofs[j1]);
+						// m_A.multiplyAdd2_p8r ( JinvMrow + 8*(size_t)numRows, 
+						// Jptr + 2*8*(size_t)ofs[j1] + ofsother, numRows, numRowsOther, row__,ofs[j1]);
 					}
 					startJointNodeB = jointNodeArray[startJointNodeB].nextJointNodeIndex;
 				}
@@ -417,15 +422,15 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 
 				const unsigned int infom =  row__ < m_tmpSolverNonContactConstraintPool.size() ? m_tmpConstraintSizesPool[jj].m_numConstraintRows : numContactRows;
 				
-				const btScalar *JinvMrow = JinvM + 2*8*(size_t)row__;
-				const btScalar *Jrow = Jptr + 2*8*(size_t)row__;
-				m_A.multiply2_p8r (JinvMrow, Jrow, infom, infom, row__,row__);
-				if (orgBodyB) 
-				{
-					m_A.multiplyAdd2_p8r (JinvMrow + 8*(size_t)infom, Jrow + 8*(size_t)infom, infom, infom,  row__,row__);
-				}
-				row__ += infom;
-				jj++;
+				// const btScalar *JinvMrow = JinvM + 2*8*(size_t)row__;
+				// const btScalar *Jrow = Jptr + 2*8*(size_t)row__;
+				// m_A.multiply2_p8r (JinvMrow, Jrow, infom, infom, row__,row__);
+				// if (orgBodyB) 
+				// {
+				// 	m_A.multiplyAdd2_p8r (JinvMrow + 8*(size_t)infom, Jrow + 8*(size_t)infom, infom, infom,  row__,row__);
+				// }
+				// row__ += infom;
+				// jj++;
 			}
 		}
 	}
@@ -435,7 +440,7 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 		// add cfm to the diagonal of m_A
 		for ( int i=0; i<m_A.rows(); ++i) 
 		{
-			m_A.setElem(i,i,m_A(i,i)+ infoGlobal.m_globalCfm/ infoGlobal.m_timeStep);
+			// m_A.setElem(i,i,m_A(i,i)+ infoGlobal.m_globalCfm/ infoGlobal.m_timeStep);
 		}
 	}
 				   
@@ -455,8 +460,8 @@ void btMLCPSolver::createMLCPFast(const btContactSolverInfo& infoGlobal)
 			for (int i=0;i<m_allConstraintPtrArray.size();i++)
 			{
 				const btSolverConstraint& c = *m_allConstraintPtrArray[i];
-				m_x[i]=c.m_appliedImpulse;
-				m_xSplit[i] = c.m_appliedPushImpulse;
+				// m_x[i]=c.m_appliedImpulse;
+				// m_xSplit[i] = c.m_appliedPushImpulse;
 			}
 		} else
 		{
@@ -483,9 +488,9 @@ void btMLCPSolver::createMLCP(const btContactSolverInfo& infoGlobal)
 	{
 		if (m_allConstraintPtrArray[i]->m_jacDiagABInv)
 		{
-			m_b[i]=m_allConstraintPtrArray[i]->m_rhs/m_allConstraintPtrArray[i]->m_jacDiagABInv;
-			if (infoGlobal.m_splitImpulse)
-				m_bSplit[i] = m_allConstraintPtrArray[i]->m_rhsPenetration/m_allConstraintPtrArray[i]->m_jacDiagABInv;
+			// m_b[i]=m_allConstraintPtrArray[i]->m_rhs/m_allConstraintPtrArray[i]->m_jacDiagABInv;
+			// if (infoGlobal.m_splitImpulse)
+			// 	m_bSplit[i] = m_allConstraintPtrArray[i]->m_rhsPenetration/m_allConstraintPtrArray[i]->m_jacDiagABInv;
 		}
 	}
  
@@ -496,14 +501,14 @@ void btMLCPSolver::createMLCP(const btContactSolverInfo& infoGlobal)
 	{
 		const btSolverBody& rb = m_tmpSolverBodyPool[i];
 		const btVector3& invMass = rb.m_invMass;
-		setElem(Minv,i*6+0,i*6+0,invMass[0]);
-		setElem(Minv,i*6+1,i*6+1,invMass[1]);
-		setElem(Minv,i*6+2,i*6+2,invMass[2]);
+		// setElem(Minv,i*6+0,i*6+0,invMass[0]);
+		// setElem(Minv,i*6+1,i*6+1,invMass[1]);
+		// setElem(Minv,i*6+2,i*6+2,invMass[2]);
 		btRigidBody* orgBody = m_tmpSolverBodyPool[i].m_originalBody;
  
-		for (int r=0;r<3;r++)
-			for (int c=0;c<3;c++)
-				setElem(Minv,i*6+3+r,i*6+3+c,orgBody? orgBody->getInvInertiaTensorWorld()[r][c] : 0);
+		// for (int r=0;r<3;r++)
+		// 	for (int c=0;c<3;c++)
+		// 		setElem(Minv,i*6+3+r,i*6+3+c,orgBody? orgBody->getInvInertiaTensorWorld()[r][c] : 0);
 	}
  
     btMatrixXu& J = m_scratchJ;
@@ -516,28 +521,28 @@ void btMLCPSolver::createMLCP(const btContactSolverInfo& infoGlobal)
 	for (int i=0;i<numConstraintRows;i++)
 	{
 
-		m_lo[i] = m_allConstraintPtrArray[i]->m_lowerLimit;
-		m_hi[i] = m_allConstraintPtrArray[i]->m_upperLimit;
+		// m_lo[i] = m_allConstraintPtrArray[i]->m_lowerLimit;
+		// m_hi[i] = m_allConstraintPtrArray[i]->m_upperLimit;
  
 		int bodyIndex0 = m_allConstraintPtrArray[i]->m_solverBodyIdA;
 		int bodyIndex1 = m_allConstraintPtrArray[i]->m_solverBodyIdB;
 		if (m_tmpSolverBodyPool[bodyIndex0].m_originalBody)
 		{
-			setElem(J,i,6*bodyIndex0+0,m_allConstraintPtrArray[i]->m_contactNormal1[0]);
-			setElem(J,i,6*bodyIndex0+1,m_allConstraintPtrArray[i]->m_contactNormal1[1]);
-			setElem(J,i,6*bodyIndex0+2,m_allConstraintPtrArray[i]->m_contactNormal1[2]);
-			setElem(J,i,6*bodyIndex0+3,m_allConstraintPtrArray[i]->m_relpos1CrossNormal[0]);
-			setElem(J,i,6*bodyIndex0+4,m_allConstraintPtrArray[i]->m_relpos1CrossNormal[1]);
-			setElem(J,i,6*bodyIndex0+5,m_allConstraintPtrArray[i]->m_relpos1CrossNormal[2]);
+			// setElem(J,i,6*bodyIndex0+0,m_allConstraintPtrArray[i]->m_contactNormal1[0]);
+			// setElem(J,i,6*bodyIndex0+1,m_allConstraintPtrArray[i]->m_contactNormal1[1]);
+			// setElem(J,i,6*bodyIndex0+2,m_allConstraintPtrArray[i]->m_contactNormal1[2]);
+			// setElem(J,i,6*bodyIndex0+3,m_allConstraintPtrArray[i]->m_relpos1CrossNormal[0]);
+			// setElem(J,i,6*bodyIndex0+4,m_allConstraintPtrArray[i]->m_relpos1CrossNormal[1]);
+			// setElem(J,i,6*bodyIndex0+5,m_allConstraintPtrArray[i]->m_relpos1CrossNormal[2]);
 		}
 		if (m_tmpSolverBodyPool[bodyIndex1].m_originalBody)
 		{
-			setElem(J,i,6*bodyIndex1+0,m_allConstraintPtrArray[i]->m_contactNormal2[0]);
-			setElem(J,i,6*bodyIndex1+1,m_allConstraintPtrArray[i]->m_contactNormal2[1]);
-			setElem(J,i,6*bodyIndex1+2,m_allConstraintPtrArray[i]->m_contactNormal2[2]);
-			setElem(J,i,6*bodyIndex1+3,m_allConstraintPtrArray[i]->m_relpos2CrossNormal[0]);
-			setElem(J,i,6*bodyIndex1+4,m_allConstraintPtrArray[i]->m_relpos2CrossNormal[1]);
-			setElem(J,i,6*bodyIndex1+5,m_allConstraintPtrArray[i]->m_relpos2CrossNormal[2]);
+			// setElem(J,i,6*bodyIndex1+0,m_allConstraintPtrArray[i]->m_contactNormal2[0]);
+			// setElem(J,i,6*bodyIndex1+1,m_allConstraintPtrArray[i]->m_contactNormal2[1]);
+			// setElem(J,i,6*bodyIndex1+2,m_allConstraintPtrArray[i]->m_contactNormal2[2]);
+			// setElem(J,i,6*bodyIndex1+3,m_allConstraintPtrArray[i]->m_relpos2CrossNormal[0]);
+			// setElem(J,i,6*bodyIndex1+4,m_allConstraintPtrArray[i]->m_relpos2CrossNormal[1]);
+			// setElem(J,i,6*bodyIndex1+5,m_allConstraintPtrArray[i]->m_relpos2CrossNormal[2]);
 		}
 	}
  
@@ -563,7 +568,7 @@ void btMLCPSolver::createMLCP(const btContactSolverInfo& infoGlobal)
 		// add cfm to the diagonal of m_A
 		for ( int i=0; i<m_A.rows(); ++i) 
 		{
-			m_A.setElem(i,i,m_A(i,i)+ infoGlobal.m_globalCfm / infoGlobal.m_timeStep);
+			// m_A.setElem(i,i,m_A(i,i)+ infoGlobal.m_globalCfm / infoGlobal.m_timeStep);
 		}
 	}
 
@@ -575,9 +580,9 @@ void btMLCPSolver::createMLCP(const btContactSolverInfo& infoGlobal)
 	for (int i=0;i<m_allConstraintPtrArray.size();i++)
 	{
 		const btSolverConstraint& c = *m_allConstraintPtrArray[i];
-		m_x[i]=c.m_appliedImpulse;
-		if (infoGlobal.m_splitImpulse)
-			m_xSplit[i] = c.m_appliedPushImpulse;
+		// m_x[i]=c.m_appliedImpulse;
+		// if (infoGlobal.m_splitImpulse)
+		// 	m_xSplit[i] = c.m_appliedPushImpulse;
 	}
 
 }

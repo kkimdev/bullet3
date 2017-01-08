@@ -477,7 +477,7 @@ void SimpleOpenGL3App::registerGrid(int cells_x, int cells_z, float color0[4], f
 {
 	b3Vector3 cubeExtents=b3MakeVector3(0.5,0.5,0.5);
 	cubeExtents[m_data->m_upAxis] = 0;
-	int cubeId = registerCubeShape(cubeExtents[0],cubeExtents[1],cubeExtents[2]);
+	int cubeId = registerCubeShape((float)cubeExtents[0],(float)cubeExtents[1],(float)cubeExtents[2]);
 
 	b3Quaternion orn(0,0,0,1);
 	b3Vector3 center=b3MakeVector3(0,0,0,1);
@@ -501,7 +501,7 @@ void SimpleOpenGL3App::registerGrid(int cells_x, int cells_z, float color0[4], f
 			{
 				center =b3MakeVector3((i + 0.5f) - cells_x * 0.5f, (j + 0.5f) - cells_z * 0.5f,0.f );
 			}
-			m_instancingRenderer->registerGraphicsInstance(cubeId,center,orn,color,scaling);
+			// m_instancingRenderer->registerGraphicsInstance(cubeId,center,orn,color,scaling);
 		}
 	}
 	
@@ -624,14 +624,14 @@ void SimpleOpenGL3App::drawGrid(DrawGridData data)
 	}
 
 
-	m_instancingRenderer->drawLines(&vertices[0].x,
-			gridColor,
-			vertices.size(),sizeof(b3Vector3),&indices[0],indices.size(),1);
+	// m_instancingRenderer->drawLines(&vertices[0].x,
+	// 		gridColor,
+	// 		vertices.size(),sizeof(b3Vector3),&indices[0],indices.size(),1);
 	
 
-	m_instancingRenderer->drawLine(b3MakeVector3(0,0,0),b3MakeVector3(1,0,0),b3MakeVector3(1,0,0),3);
-	m_instancingRenderer->drawLine(b3MakeVector3(0,0,0),b3MakeVector3(0,1,0),b3MakeVector3(0,1,0),3);
-	m_instancingRenderer->drawLine(b3MakeVector3(0,0,0),b3MakeVector3(0,0,1),b3MakeVector3(0,0,1),3);
+	// m_instancingRenderer->drawLine(b3MakeVector3(0,0,0),b3MakeVector3(1,0,0),b3MakeVector3(1,0,0),3);
+	// m_instancingRenderer->drawLine(b3MakeVector3(0,0,0),b3MakeVector3(0,1,0),b3MakeVector3(0,1,0),3);
+	// m_instancingRenderer->drawLine(b3MakeVector3(0,0,0),b3MakeVector3(0,0,1),b3MakeVector3(0,0,1),3);
 
 //	void GLInstancingRenderer::drawPoints(const float* positions, const float color[4], int numPoints, int pointStrideInBytes, float pointDrawSize)
 
@@ -639,9 +639,9 @@ void SimpleOpenGL3App::drawGrid(DrawGridData data)
 //	b3Vector3 points[3] = { b3MakeVector3(1, 0, 0), b3MakeVector3(0, 1, 0), b3MakeVector3(0, 0, 1) };
 //	m_instancingRenderer->drawPoints(&points[0].x, b3MakeVector3(1, 0, 0), 3, sizeof(b3Vector3), 6);
 
-	m_instancingRenderer->drawPoint(b3MakeVector3(1,0,0),b3MakeVector3(1,0,0),6);
-	m_instancingRenderer->drawPoint(b3MakeVector3(0,1,0),b3MakeVector3(0,1,0),6);
-	m_instancingRenderer->drawPoint(b3MakeVector3(0,0,1),b3MakeVector3(0,0,1),6);
+	// m_instancingRenderer->drawPoint(b3MakeVector3(1,0,0),b3MakeVector3(1,0,0),6);
+	// m_instancingRenderer->drawPoint(b3MakeVector3(0,1,0),b3MakeVector3(0,1,0),6);
+	// m_instancingRenderer->drawPoint(b3MakeVector3(0,0,1),b3MakeVector3(0,0,1),6);
 }
 
 void SimpleOpenGL3App::setBackgroundColor(float red, float green, float blue)

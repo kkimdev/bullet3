@@ -970,7 +970,7 @@ SIMD_FORCE_INLINE	void	btQuaternion::serialize(struct	btQuaternionData& dataOut)
 {
 	///could also do a memcpy, check if it is worth it
 	for (int i=0;i<4;i++)
-		dataOut.m_floats[i] = m_floats[i];
+		dataOut.m_floats[i] = (float) m_floats[i];
 }
 
 SIMD_FORCE_INLINE void	btQuaternion::deSerialize(const struct	btQuaternionData& dataIn)

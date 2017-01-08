@@ -1311,8 +1311,8 @@ void b3GpuSapBroadphase::createLargeProxy(const b3Vector3& aabbMin,  const b3Vec
 	b3SapAabb aabb;
 	for (int i=0;i<4;i++)
 	{
-		aabb.m_min[i] = aabbMin[i];
-		aabb.m_max[i] = aabbMax[i];
+		aabb.m_min[i] = (float) aabbMin[i];
+		aabb.m_max[i] = (float) aabbMax[i];
 	}
 	aabb.m_minIndices[3] = index;
 	aabb.m_signedMaxIndices[3] = m_allAabbsCPU.size();
@@ -1327,8 +1327,8 @@ void b3GpuSapBroadphase::createProxy(const b3Vector3& aabbMin,  const b3Vector3&
 	b3SapAabb aabb;
 	for (int i=0;i<4;i++)
 	{
-		aabb.m_min[i] = aabbMin[i];
-		aabb.m_max[i] = aabbMax[i];
+		aabb.m_min[i] = (float) aabbMin[i];
+		aabb.m_max[i] = (float) aabbMax[i];
 	}
 	aabb.m_minIndices[3] = index;
 	aabb.m_signedMaxIndices[3] = m_allAabbsCPU.size();

@@ -68,8 +68,8 @@ void calculateDotJacUError(const MultiBodyTreeCreator& creator, const int nloops
 
     for (int loop = 0; loop < nloops; loop++) {
         for (int i = 0; i < q.size(); i++) {
-            q(i) = b3RandRange(-B3_PI, B3_PI);
-            u(i) = b3RandRange(-B3_PI, B3_PI);
+            q(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
+            u(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
         }
 
         EXPECT_EQ(0, tree1->calculateKinematics(q, u, zero));
@@ -128,7 +128,7 @@ void calculateJacobianError(const MultiBodyTreeCreator& creator, const int nloop
 
     for (int loop = 0; loop < nloops; loop++) {
         for (int i = 0; i < q.size(); i++) {
-            q(i) = b3RandRange(-B3_PI, B3_PI);
+            q(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
         }
 
         EXPECT_EQ(0, tree2->calculatePositionKinematics(q));
@@ -203,8 +203,8 @@ void calculateVelocityJacobianError(const MultiBodyTreeCreator& creator, const i
 
     for (int loop = 0; loop < nloops; loop++) {
         for (int i = 0; i < q.size(); i++) {
-            q(i) = b3RandRange(-B3_PI, B3_PI);
-            u(i) = b3RandRange(-B3_PI, B3_PI);
+            q(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
+            u(i) = (idScalar) b3RandRange(-B3_PI, B3_PI);
         }
 
         EXPECT_EQ(0, tree1->calculatePositionAndVelocityKinematics(q, u));
