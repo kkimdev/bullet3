@@ -1,6 +1,0 @@
-# the following under build3
-./premake4_linux64 gmake
-
-# The following under build3/gmake
-CXXFLAGS="-std=c++1z" DEFINES="-D BT_FORCE_DOUBLE_FUNCTIONS -D B3_FORCE_DOUBLE_FUNCTIONS" make
-

@@ -738,7 +738,7 @@ int MultiBodyTree::MultiBodyImpl::calculateMassMatrix(const vecx &q, const bool 
 						return -1;
 					}
 					setSixDoFJacobians(row - q_index_min, Jac_JR, Jac_JT);
-					const double Mrc = double(Jac_JR.dot(body_eom_rot) + Jac_JT.dot(body_eom_trans));
+					const double Mrc = Jac_JR.dot(body_eom_rot) + Jac_JT.dot(body_eom_trans);
 					setMatxxElem(col, row, Mrc, mass_matrix);
 				}
 				// 2. ancestor dofs
@@ -763,7 +763,7 @@ int MultiBodyTree::MultiBodyImpl::calculateMassMatrix(const vecx &q, const bool 
 						if (FLOATING == parent_body.m_joint_type) {
 							setSixDoFJacobians(row - parent_body_q_index_min, Jac_JR, Jac_JT);
 						}
-						const double Mrc = double(Jac_JR.dot(body_eom_rot) + Jac_JT.dot(body_eom_trans));
+						const double Mrc = Jac_JR.dot(body_eom_rot) + Jac_JT.dot(body_eom_trans);
 						setMatxxElem(col, row, Mrc, mass_matrix);
 					}
 

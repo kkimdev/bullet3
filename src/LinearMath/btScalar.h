@@ -28,8 +28,6 @@ subject to the following restrictions:
 #include <stdlib.h>//size_t for MSVC 6.0
 #include <float.h>
 
-#include "../../kklautodiff/src/kklautodiff.hpp"
-
 /* SVN $Revision$ on $Date$ from http://bullet.googlecode.com*/
 #define BT_BULLET_VERSION 286
 
@@ -273,12 +271,12 @@ inline int	btGetVersion()
 ///The btScalar type abstracts floating point numbers, to easily switch between double and single floating point precision.
 #if defined(BT_USE_DOUBLE_PRECISION)
 
-typedef kklautodiff::RealNumber<double> btScalar;
+typedef double btScalar;
 //this number could be bigger in double precision
 #define BT_LARGE_FLOAT 1e30
 #else
 
-typedef kklautodiff::RealNumber<float> btScalar;
+typedef float btScalar;
 //keep BT_LARGE_FLOAT*BT_LARGE_FLOAT < FLT_MAX
 #define BT_LARGE_FLOAT 1e18f
 #endif
@@ -417,7 +415,7 @@ SIMD_FORCE_INLINE btScalar btPow(btScalar x,btScalar y) { return pow(x,y); }
 SIMD_FORCE_INLINE btScalar btFmod(btScalar x,btScalar y) { return fmod(x,y); }
 
 #else
-#error use BT_FORCE_DOUBLE_FUNCTIONS
+		
 SIMD_FORCE_INLINE btScalar btSqrt(btScalar y) 
 { 
 #ifdef USE_APPROXIMATION

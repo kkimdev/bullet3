@@ -1485,32 +1485,32 @@ void	btDiscreteDynamicsWorld::serializeDynamicsWorldInfo(btSerializer* serialize
 		memset(worldInfo ,0x00,len);
 
 		m_gravity.serialize(worldInfo->m_gravity);
-		worldInfo->m_solverInfo.m_tau = (float) getSolverInfo().m_tau;
-		worldInfo->m_solverInfo.m_damping = (float) getSolverInfo().m_damping;
-		worldInfo->m_solverInfo.m_friction = (float) getSolverInfo().m_friction;
-		worldInfo->m_solverInfo.m_timeStep = (float) getSolverInfo().m_timeStep;
+		worldInfo->m_solverInfo.m_tau = getSolverInfo().m_tau;
+		worldInfo->m_solverInfo.m_damping = getSolverInfo().m_damping;
+		worldInfo->m_solverInfo.m_friction = getSolverInfo().m_friction;
+		worldInfo->m_solverInfo.m_timeStep = getSolverInfo().m_timeStep;
 
-		worldInfo->m_solverInfo.m_restitution = (float) getSolverInfo().m_restitution;
-		worldInfo->m_solverInfo.m_maxErrorReduction = (float) getSolverInfo().m_maxErrorReduction;
-		worldInfo->m_solverInfo.m_sor = (float) getSolverInfo().m_sor;
-		worldInfo->m_solverInfo.m_erp = (float) getSolverInfo().m_erp;
+		worldInfo->m_solverInfo.m_restitution = getSolverInfo().m_restitution;
+		worldInfo->m_solverInfo.m_maxErrorReduction = getSolverInfo().m_maxErrorReduction;
+		worldInfo->m_solverInfo.m_sor = getSolverInfo().m_sor;
+		worldInfo->m_solverInfo.m_erp = getSolverInfo().m_erp;
 
-		worldInfo->m_solverInfo.m_erp2 = (float) getSolverInfo().m_erp2;
-		worldInfo->m_solverInfo.m_globalCfm = (float) getSolverInfo().m_globalCfm;
-		worldInfo->m_solverInfo.m_splitImpulsePenetrationThreshold = (float) getSolverInfo().m_splitImpulsePenetrationThreshold;
-		worldInfo->m_solverInfo.m_splitImpulseTurnErp = (float) getSolverInfo().m_splitImpulseTurnErp;
+		worldInfo->m_solverInfo.m_erp2 = getSolverInfo().m_erp2;
+		worldInfo->m_solverInfo.m_globalCfm = getSolverInfo().m_globalCfm;
+		worldInfo->m_solverInfo.m_splitImpulsePenetrationThreshold = getSolverInfo().m_splitImpulsePenetrationThreshold;
+		worldInfo->m_solverInfo.m_splitImpulseTurnErp = getSolverInfo().m_splitImpulseTurnErp;
 
-		worldInfo->m_solverInfo.m_linearSlop = (float) getSolverInfo().m_linearSlop;
-		worldInfo->m_solverInfo.m_warmstartingFactor = (float) getSolverInfo().m_warmstartingFactor;
-		worldInfo->m_solverInfo.m_maxGyroscopicForce = (float) getSolverInfo().m_maxGyroscopicForce;
-		worldInfo->m_solverInfo.m_singleAxisRollingFrictionThreshold = (float) getSolverInfo().m_singleAxisRollingFrictionThreshold;
+		worldInfo->m_solverInfo.m_linearSlop = getSolverInfo().m_linearSlop;
+		worldInfo->m_solverInfo.m_warmstartingFactor = getSolverInfo().m_warmstartingFactor;
+		worldInfo->m_solverInfo.m_maxGyroscopicForce = getSolverInfo().m_maxGyroscopicForce;
+		worldInfo->m_solverInfo.m_singleAxisRollingFrictionThreshold = getSolverInfo().m_singleAxisRollingFrictionThreshold;
 
-		worldInfo->m_solverInfo.m_numIterations = (float) getSolverInfo().m_numIterations;
-		worldInfo->m_solverInfo.m_solverMode = (float) getSolverInfo().m_solverMode;
-		worldInfo->m_solverInfo.m_restingContactRestitutionThreshold = (float) getSolverInfo().m_restingContactRestitutionThreshold;
-		worldInfo->m_solverInfo.m_minimumSolverBatchSize = (float) getSolverInfo().m_minimumSolverBatchSize;
+		worldInfo->m_solverInfo.m_numIterations = getSolverInfo().m_numIterations;
+		worldInfo->m_solverInfo.m_solverMode = getSolverInfo().m_solverMode;
+		worldInfo->m_solverInfo.m_restingContactRestitutionThreshold = getSolverInfo().m_restingContactRestitutionThreshold;
+		worldInfo->m_solverInfo.m_minimumSolverBatchSize = getSolverInfo().m_minimumSolverBatchSize;
 
-		worldInfo->m_solverInfo.m_splitImpulse = (float) getSolverInfo().m_splitImpulse;
+		worldInfo->m_solverInfo.m_splitImpulse = getSolverInfo().m_splitImpulse;
 
 #ifdef BT_USE_DOUBLE_PRECISION
 		const char* structType = "btDynamicsWorldDoubleData";

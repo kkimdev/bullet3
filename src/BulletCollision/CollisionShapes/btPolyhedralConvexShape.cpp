@@ -80,11 +80,11 @@ bool	btPolyhedralConvexShape::initializePolyhedralFeatures(int shiftVerticesByMa
 
 		btGeometryUtil::getVerticesFromPlaneEquations(shiftedPlaneEquations,tmpVertices);
 	
-		// conv.compute(&tmpVertices[0].getX(), sizeof(btVector3),tmpVertices.size(),0.f,0.f);
+		conv.compute(&tmpVertices[0].getX(), sizeof(btVector3),tmpVertices.size(),0.f,0.f);
 	} else
 	{
 		
-		// conv.compute(&orgVertices[0].getX(), sizeof(btVector3),orgVertices.size(),0.f,0.f);
+		conv.compute(&orgVertices[0].getX(), sizeof(btVector3),orgVertices.size(),0.f,0.f);
 	}
 
 

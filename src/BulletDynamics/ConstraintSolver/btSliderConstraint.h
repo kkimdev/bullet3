@@ -350,11 +350,11 @@ SIMD_FORCE_INLINE	const char*	btSliderConstraint::serialize(void* dataBuffer, bt
 	m_frameInA.serialize(sliderData->m_rbAFrame);
 	m_frameInB.serialize(sliderData->m_rbBFrame);
 
-	sliderData->m_linearUpperLimit = (float) m_upperLinLimit;
-	sliderData->m_linearLowerLimit = (float) m_lowerLinLimit;
+	sliderData->m_linearUpperLimit = m_upperLinLimit;
+	sliderData->m_linearLowerLimit = m_lowerLinLimit;
 
-	sliderData->m_angularUpperLimit = (float) m_upperAngLimit;
-	sliderData->m_angularLowerLimit = (float) m_lowerAngLimit;
+	sliderData->m_angularUpperLimit = m_upperAngLimit;
+	sliderData->m_angularLowerLimit = m_lowerAngLimit;
 
 	sliderData->m_useLinearReferenceFrameA = m_useLinearReferenceFrameA;
 	sliderData->m_useOffsetForConstraintFrame = m_useOffsetForConstraintFrame;

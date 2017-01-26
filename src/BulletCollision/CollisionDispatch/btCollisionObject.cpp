@@ -85,7 +85,7 @@ const char* btCollisionObject::serialize(void* dataBuffer, btSerializer* seriali
 	m_interpolationAngularVelocity.serialize(dataOut->m_interpolationAngularVelocity);
 	m_anisotropicFriction.serialize(dataOut->m_anisotropicFriction);
 	dataOut->m_hasAnisotropicFriction = m_hasAnisotropicFriction;
-	dataOut->m_contactProcessingThreshold = (float) m_contactProcessingThreshold;
+	dataOut->m_contactProcessingThreshold = m_contactProcessingThreshold;
 	dataOut->m_broadphaseHandle = 0;
 	dataOut->m_collisionShape = serializer->getUniquePointer(m_collisionShape);
 	dataOut->m_rootCollisionShape = 0;//@todo
@@ -93,12 +93,12 @@ const char* btCollisionObject::serialize(void* dataBuffer, btSerializer* seriali
 	dataOut->m_islandTag1 = m_islandTag1;
 	dataOut->m_companionId = m_companionId;
 	dataOut->m_activationState1 = m_activationState1;
-	dataOut->m_deactivationTime = (float) m_deactivationTime;
-	dataOut->m_friction = (float) m_friction;
-	dataOut->m_rollingFriction = (float) m_rollingFriction;
-	dataOut->m_contactDamping = (float) m_contactDamping;
-	dataOut->m_contactStiffness = (float) m_contactStiffness;
-	dataOut->m_restitution = (float) m_restitution;
+	dataOut->m_deactivationTime = m_deactivationTime;
+	dataOut->m_friction = m_friction;
+	dataOut->m_rollingFriction = m_rollingFriction;
+	dataOut->m_contactDamping = m_contactDamping;
+	dataOut->m_contactStiffness = m_contactStiffness;
+	dataOut->m_restitution = m_restitution;
 	dataOut->m_internalType = m_internalType;
 	
 	char* name = (char*) serializer->findNameForPointer(this);
@@ -107,9 +107,9 @@ const char* btCollisionObject::serialize(void* dataBuffer, btSerializer* seriali
 	{
 		serializer->serializeName(name);
 	}
-	dataOut->m_hitFraction = (float) m_hitFraction;
-	dataOut->m_ccdSweptSphereRadius = (float) m_ccdSweptSphereRadius;
-	dataOut->m_ccdMotionThreshold = (float) m_ccdMotionThreshold;
+	dataOut->m_hitFraction = m_hitFraction;
+	dataOut->m_ccdSweptSphereRadius = m_ccdSweptSphereRadius;
+	dataOut->m_ccdMotionThreshold = m_ccdMotionThreshold;
 	dataOut->m_checkCollideWith = m_checkCollideWith;
 
 	return btCollisionObjectDataName;

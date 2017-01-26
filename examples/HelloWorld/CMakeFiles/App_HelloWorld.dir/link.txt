@@ -1,1 +1,0 @@
-/usr/lib/ccache/c++   -O3 -g -std=c++1z   CMakeFiles/App_HelloWorld.dir/HelloWorld.o  -o App_HelloWorld  -L../../bin -rdynamic -lBulletDynamics_gmake_x64_release -lBulletCollision_gmake_x64_release -lLinearMath_gmake_x64_release -Wl,-rpath,../../bin 

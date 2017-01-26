@@ -238,7 +238,7 @@ end
 	language "C++"
 
 
-	if _OPTIONS["no-demos"] then
+	if not _OPTIONS["no-demos"] then
 		include "../examples/ExampleBrowser"
 		include "../examples/OpenGLWindow"
 		include "../examples/ThirdPartyLibs/Gwen"
@@ -298,26 +298,26 @@ end
                 include "../Extras"
         end
 
--- 	if not _OPTIONS["no-test"] then
--- 		include "../test/Bullet2"
+	if not _OPTIONS["no-test"] then
+		include "../test/Bullet2"
 
--- 		if not _OPTIONS["no-gtest"] then
--- 			include "../test/gtest-1.7.0"
--- --			include "../test/hello_gtest"
--- 			include "../test/collision"
--- --			include "../test/BulletDynamics/pendulum"
--- 			if not _OPTIONS["no-bullet3"] then
--- 				if not _OPTIONS["no-extras"] then
--- 					include "../test/InverseDynamics"
--- 				end
--- --				include "../test/TestBullet3OpenCL"
--- 			end
--- 			if not _OPTIONS["no-demos"] then
--- 				-- Gwen is only used for demos
--- 				include "../test/GwenOpenGLTest"
--- 			end
--- 		end
--- 	end
+		if not _OPTIONS["no-gtest"] then
+			include "../test/gtest-1.7.0"
+--			include "../test/hello_gtest"
+			include "../test/collision"
+			include "../test/BulletDynamics/pendulum"
+			if not _OPTIONS["no-bullet3"] then
+				if not _OPTIONS["no-extras"] then
+					include "../test/InverseDynamics"
+				end
+				include "../test/TestBullet3OpenCL"
+			end
+			if not _OPTIONS["no-demos"] then
+				-- Gwen is only used for demos
+				include "../test/GwenOpenGLTest"
+			end
+		end
+	end
 
 	include "../src/BulletInverseDynamics"
  	include "../src/BulletSoftBody"

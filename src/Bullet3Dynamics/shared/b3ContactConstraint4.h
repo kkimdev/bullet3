@@ -28,7 +28,7 @@ struct b3ContactConstraint4
 //inline	void setFrictionCoeff(float value) { m_linear[3] = value; }
 inline	float b3GetFrictionCoeff(b3ContactConstraint4_t* constraint) 
 {
-	return (float)constraint->m_linear.w; 
+	return constraint->m_linear.w; 
 }
 
 #endif //B3_CONTACT_CONSTRAINT5_H

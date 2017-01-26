@@ -75,8 +75,8 @@ inline int    b3MaxDot( b3Float4ConstArg vec, __global const b3Float4* vecArray,
     int ptIndex = -1;
     for( i = 0; i < vecLen; i++ )
     {
-		float dot = (float) b3Dot3F4(vecArray[i], vec);
-
+        float dot = b3Dot3F4(vecArray[i],vec);
+            
         if( dot > maxDot )
         {
             maxDot = dot;

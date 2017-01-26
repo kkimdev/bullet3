@@ -76,7 +76,7 @@ struct btVectorX
 		{
 			if (nn == 1)
 			{
-				norm = (float) btFabs((*this)[0]);
+				norm = btFabs((*this)[0]);
 			}
 			else
 			{

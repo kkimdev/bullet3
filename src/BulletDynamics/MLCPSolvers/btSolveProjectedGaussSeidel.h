@@ -75,7 +75,7 @@ public:
 
 				btScalar aDiag = A(i,i);
 				btScalar xOld = x[i];
-				x [i] = (float) ((b [i] - delta) / aDiag);
+				x [i] = (b [i] - delta) / aDiag;
 				btScalar s = 1.f;
 
 				if (limitDependency[i]>=0)
@@ -86,9 +86,9 @@ public:
 				}
 			
 				if (x[i]<lo[i]*s)
-					x[i]=(float) (lo[i]*s);
+					x[i]=lo[i]*s;
 				if (x[i]>hi[i]*s)
-					x[i]=(float) (hi[i]*s);
+					x[i]=hi[i]*s;
 				btScalar diff = x[i] - xOld;
 				m_leastSquaresResidual += diff*diff;
 			}

@@ -189,14 +189,14 @@ int	b3CpuNarrowPhase::registerConvexHullShape(b3ConvexUtility* utilPtr)
 			myAabbMin.setMin(utilPtr->m_vertices[i]);
 			myAabbMax.setMax(utilPtr->m_vertices[i]);
 		}
-		aabb.m_min[0] = (float) myAabbMin[0];
-		aabb.m_min[1] = (float) myAabbMin[1];
-		aabb.m_min[2] = (float) myAabbMin[2];
+		aabb.m_min[0] = myAabbMin[0];
+		aabb.m_min[1] = myAabbMin[1];
+		aabb.m_min[2] = myAabbMin[2];
 		aabb.m_minIndices[3] = 0;
 
-		aabb.m_max[0] = (float) myAabbMax[0];
-		aabb.m_max[1] = (float) myAabbMax[1];
-		aabb.m_max[2] = (float) myAabbMax[2];
+		aabb.m_max[0] = myAabbMax[0];
+		aabb.m_max[1] = myAabbMax[1];
+		aabb.m_max[2] = myAabbMax[2];
 		aabb.m_signedMaxIndices[3] = 0;
 
 		m_data->m_localShapeAABBCPU.push_back(aabb);
@@ -259,7 +259,7 @@ int b3CpuNarrowPhase::registerConvexHullShapeInternal(b3ConvexUtility* convexPtr
 	convex.mE = convexPtr->mE;
 	convex.m_extents= convexPtr->m_extents;
 	convex.m_localCenter = convexPtr->m_localCenter;
-	convex.m_radius = (float) convexPtr->m_radius;
+	convex.m_radius = convexPtr->m_radius;
 	
 	convex.m_numUniqueEdges = convexPtr->m_uniqueEdges.size();
 	int edgeOffset = m_data->m_uniqueEdges.size();

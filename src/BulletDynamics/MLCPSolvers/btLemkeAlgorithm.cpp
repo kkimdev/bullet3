@@ -233,10 +233,10 @@ btScalar btEpsRoot() {
 		  Rows.push_back(vec);
 		  btScalar a = A(row, pivotColIndex);
 		  if (a > 0) {
-				Rows[row][0] = (float) (A(row, 2 * dim + 1) / a);
-				Rows[row][1] = (float) (A(row, 2 * dim) / a);
+			  Rows[row][0] = A(row, 2 * dim + 1) / a;
+			  Rows[row][1] = A(row, 2 * dim) / a;
 			  for (int j = 2; j < dim + 1; j++)
-					Rows[row][j] = (float) (A(row, j - 1) / a);
+				  Rows[row][j] = A(row, j - 1) / a;
 
 #ifdef BT_DEBUG_OSTREAM
 		//		if (DEBUGLEVEL) {
@@ -313,7 +313,7 @@ void btLemkeAlgorithm::GaussJordanEliminationStep(btMatrixXu& A, int pivotRowInd
 		  {
 			  btScalar v = A(i, j);
 			  v += A(pivotRowIndex, j) * A(i, pivotColumnIndex) * a;
-            A.setElem(i, j, (float) v);
+            A.setElem(i, j, v);
 		  }
 		}
 	  }
@@ -324,7 +324,7 @@ void btLemkeAlgorithm::GaussJordanEliminationStep(btMatrixXu& A, int pivotRowInd
 #endif //BT_DEBUG_OSTREAM
     for (int i = 0; i < A.cols(); i++) 
 	{
-      A.mulElem(pivotRowIndex, i,(float) -a);
+      A.mulElem(pivotRowIndex, i,-a);
     }
 #ifdef BT_DEBUG_OSTREAM
 	cout << A << std::endl;

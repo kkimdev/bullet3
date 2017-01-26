@@ -48,19 +48,19 @@ inline int b3ReduceContacts(const b3Float4* p, int nPoints, const b3Float4& near
     {
         if (p[ie].w<minW)
         {
-            minW = (float) p[ie].w;
+            minW = p[ie].w;
             minIndex=ie;
         }
         float f;
         b3Float4 r = p[ie]-center;
-        f = (float) b3Dot3F4( u, r );
+        f = b3Dot3F4( u, r );
         if (f<maxDots.x)
         {
             maxDots.x = f;
             contactIdx[0].x = ie;
         }
         
-        f = (float) b3Dot3F4( -u, r );
+        f = b3Dot3F4( -u, r );
         if (f<maxDots.y)
         {
             maxDots.y = f;
@@ -68,14 +68,14 @@ inline int b3ReduceContacts(const b3Float4* p, int nPoints, const b3Float4& near
         }
         
         
-        f = (float) b3Dot3F4( v, r );
+        f = b3Dot3F4( v, r );
         if (f<maxDots.z)
         {
             maxDots.z = f;
             contactIdx[0].z = ie;
         }
         
-        f = (float) b3Dot3F4( -v, r );
+        f = b3Dot3F4( -v, r );
         if (f<maxDots.w)
         {
             maxDots.w = f;

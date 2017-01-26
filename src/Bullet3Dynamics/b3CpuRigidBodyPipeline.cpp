@@ -103,7 +103,7 @@ void	b3CpuRigidBodyPipeline::stepSimulation(float deltaTime)
 static	inline	float b3CalcRelVel(const b3Vector3& l0, const b3Vector3& l1, const b3Vector3& a0, const b3Vector3& a1, 
 					 const b3Vector3& linVel0, const b3Vector3& angVel0, const b3Vector3& linVel1, const b3Vector3& angVel1)
 {
-	return (float) b3Dot(l0, linVel0) + (float) b3Dot(a0, angVel0) + (float) b3Dot(l1, linVel1) + (float) b3Dot(a1, angVel1);
+	return b3Dot(l0, linVel0) + b3Dot(a0, angVel0) + b3Dot(l1, linVel1) + b3Dot(a1, angVel1);
 }
 
 
@@ -231,8 +231,8 @@ static inline void b3SolveFriction(b3ContactConstraint4& cs,
 		b3Vector3 ac = ( center - posA ).normalized();
 		if( b3Dot( ab, ac ) > 0.95f || (invMassA == 0.f || invMassB == 0.f))
 		{
-			float angNA = (float) b3Dot( n, angVelA );
-			float angNB = (float) b3Dot( n, angVelB );
+			float angNA = b3Dot( n, angVelA );
+			float angNB = b3Dot( n, angVelB );
 
 			angVelA -= (angNA*0.1f)*n;
 			angVelB -= (angNB*0.1f)*n;

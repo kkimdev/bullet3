@@ -139,7 +139,7 @@ SIMD_FORCE_INLINE	const char*	btGearConstraint::serialize(void* dataBuffer, btSe
 	m_axisInA.serialize( gear->m_axisInA );
 	m_axisInB.serialize( gear->m_axisInB );
 
-	gear->m_ratio = (float) m_ratio;
+	gear->m_ratio = m_ratio;
 
 	return btGearConstraintDataName;
 }

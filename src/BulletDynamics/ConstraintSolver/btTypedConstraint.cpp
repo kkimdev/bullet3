@@ -123,14 +123,14 @@ const char*	btTypedConstraint::serialize(void* dataBuffer, btSerializer* seriali
 	tcd->m_objectType = m_objectType;
 	tcd->m_needsFeedback = m_needsFeedback;
 	tcd->m_overrideNumSolverIterations = m_overrideNumSolverIterations;
-	tcd->m_breakingImpulseThreshold = (float) m_breakingImpulseThreshold;
+	tcd->m_breakingImpulseThreshold = m_breakingImpulseThreshold;
 	tcd->m_isEnabled = m_isEnabled? 1: 0;
 	
 	tcd->m_userConstraintId =m_userConstraintId;
 	tcd->m_userConstraintType =m_userConstraintType;
 
-	tcd->m_appliedImpulse = (float) m_appliedImpulse;
-	tcd->m_dbgDrawSize = (float) m_dbgDrawSize;
+	tcd->m_appliedImpulse = m_appliedImpulse;
+	tcd->m_dbgDrawSize = m_dbgDrawSize;
 
 	tcd->m_disableCollisionsBetweenLinkedBodies = false;
 

@@ -23,7 +23,7 @@ B3_ATTRIBUTE_ALIGNED16(struct) SimpleCameraInternalData
 	{
 		b3Transform tr;
 		tr.setIdentity();
-		// tr.getOpenGLMatrix(m_offsetTransformVR);
+		tr.getOpenGLMatrix(m_offsetTransformVR);
 	}
 	
     B3_DECLARE_ALIGNED_ALLOCATOR();
@@ -167,26 +167,26 @@ static void    b3CreateLookAt(const b3Vector3& eye, const b3Vector3& center,cons
     b3Vector3 s = (f.cross(u)).normalized();
     u = s.cross(f);
 
-    // result[0*4+0] = s.x;
-    // result[1*4+0] = s.y;
-    // result[2*4+0] = s.z;
+    result[0*4+0] = s.x;
+    result[1*4+0] = s.y;
+    result[2*4+0] = s.z;
 
-	// result[0*4+1] = u.x;
-    // result[1*4+1] = u.y;
-    // result[2*4+1] = u.z;
+	result[0*4+1] = u.x;
+    result[1*4+1] = u.y;
+    result[2*4+1] = u.z;
 
-    // result[0*4+2] =-f.x;
-    // result[1*4+2] =-f.y;
-    // result[2*4+2] =-f.z;
+    result[0*4+2] =-f.x;
+    result[1*4+2] =-f.y;
+    result[2*4+2] =-f.z;
 
-	// result[0*4+3] = 0.f;
-    // result[1*4+3] = 0.f;
-    // result[2*4+3] = 0.f;
+	result[0*4+3] = 0.f;
+    result[1*4+3] = 0.f;
+    result[2*4+3] = 0.f;
 
-    // result[3*4+0] = -s.dot(eye);
-    // result[3*4+1] = -u.dot(eye);
-    // result[3*4+2] = f.dot(eye);
-    // result[3*4+3] = 1.f;
+    result[3*4+0] = -s.dot(eye);
+    result[3*4+1] = -u.dot(eye);
+    result[3*4+2] = f.dot(eye);
+    result[3*4+3] = 1.f;
 }
 
 void SimpleCamera::setCameraUpAxis(int upAxis)
@@ -282,11 +282,11 @@ void SimpleCamera::getCameraViewMatrix(float viewMatrix[16]) const
 		for (int i=0;i<16;i++)
 		{
 			b3Transform tr;
-			// tr.setFromOpenGLMatrix(m_data->m_viewMatrixVR);
+			tr.setFromOpenGLMatrix(m_data->m_viewMatrixVR);
 			b3Transform shift=b3Transform::getIdentity();
-			// shift.setFromOpenGLMatrix(m_data->m_offsetTransformVR);
+			shift.setFromOpenGLMatrix(m_data->m_offsetTransformVR);
 			tr = tr*shift;
-			// tr.getOpenGLMatrix(viewMatrix);
+			tr.getOpenGLMatrix(viewMatrix);
 			//viewMatrix[i] = m_data->m_viewMatrixVR[i];
 		}
 	} else
@@ -297,30 +297,30 @@ void SimpleCamera::getCameraViewMatrix(float viewMatrix[16]) const
 
 void SimpleCamera::getCameraTargetPosition(double pos[3]) const
 {
-	// pos[0] =m_data->m_cameraTargetPosition[0];
-	// pos[1] =m_data->m_cameraTargetPosition[1];
-	// pos[2] =m_data->m_cameraTargetPosition[2];
+	pos[0] =m_data->m_cameraTargetPosition[0];
+	pos[1] =m_data->m_cameraTargetPosition[1];
+	pos[2] =m_data->m_cameraTargetPosition[2];
 }
 
 void SimpleCamera::getCameraPosition(double pos[3]) const
 {
-	// pos[0] =m_data->m_cameraPosition[0];
-	// pos[1] =m_data->m_cameraPosition[1];
-	// pos[2] =m_data->m_cameraPosition[2];
+	pos[0] =m_data->m_cameraPosition[0];
+	pos[1] =m_data->m_cameraPosition[1];
+	pos[2] =m_data->m_cameraPosition[2];
 }
 
 
 void SimpleCamera::getCameraTargetPosition(float pos[3]) const
 {
-	// pos[0] =m_data->m_cameraTargetPosition[0];
-	// pos[1] =m_data->m_cameraTargetPosition[1];
-	// pos[2] =m_data->m_cameraTargetPosition[2];
+	pos[0] =m_data->m_cameraTargetPosition[0];
+	pos[1] =m_data->m_cameraTargetPosition[1];
+	pos[2] =m_data->m_cameraTargetPosition[2];
 }
 void SimpleCamera::getCameraPosition(float pos[3]) const
 {
-	// pos[0] =m_data->m_cameraPosition[0];
-	// pos[1] =m_data->m_cameraPosition[1];
-	// pos[2] =m_data->m_cameraPosition[2];
+	pos[0] =m_data->m_cameraPosition[0];
+	pos[1] =m_data->m_cameraPosition[1];
+	pos[2] =m_data->m_cameraPosition[2];
 }
 
 void	SimpleCamera::setCameraTargetPosition(float x,float y,float z)

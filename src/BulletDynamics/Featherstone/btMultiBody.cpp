@@ -1245,12 +1245,12 @@ void btMultiBody::solveImatrix(const btVector3& rhs_top, const btVector3& rhs_bo
     if (num_links == 0) 
 	{
 		// in the case of 0 m_links (i.e. a plain rigid body, not a multibody) rhs * invI is easier
-		result[0] = (float) (rhs_bot[0] / m_baseInertia[0]);
-		result[1] = (float) (rhs_bot[1] / m_baseInertia[1]);
-		result[2] = (float) (rhs_bot[2] / m_baseInertia[2]);
-		result[3] = (float) (rhs_top[0] / m_baseMass);
-		result[4] = (float) (rhs_top[1] / m_baseMass);
-		result[5] = (float) (rhs_top[2] / m_baseMass);
+        result[0] = rhs_bot[0] / m_baseInertia[0];
+        result[1] = rhs_bot[1] / m_baseInertia[1];
+        result[2] = rhs_bot[2] / m_baseInertia[2];
+        result[3] = rhs_top[0] / m_baseMass;
+        result[4] = rhs_top[1] / m_baseMass;
+        result[5] = rhs_top[2] / m_baseMass;
     } else 
 	{
 		if (!m_cachedInertiaValid)
@@ -1284,12 +1284,12 @@ void btMultiBody::solveImatrix(const btVector3& rhs_top, const btVector3& rhs_bo
 		  btVector3 vbot = invI_lower_left*rhs_top;
 		  tmp = invI_lower_right * rhs_bot;
 		  vbot += tmp;
-		  result[0] = (float) vtop[0];
-		  result[1] = (float) vtop[1];
-		  result[2] = (float) vtop[2];
-		  result[3] = (float) vbot[0];
-		  result[4] = (float) vbot[1];
-		  result[5] = (float) vbot[2];
+		  result[0] = vtop[0];
+		  result[1] = vtop[1];
+		  result[2] = vtop[2];
+		  result[3] = vbot[0];
+		  result[4] = vbot[1];
+		  result[5] = vbot[2];
 		}
 		
     }
@@ -1936,7 +1936,7 @@ const char*	btMultiBody::serialize(void* dataBuffer, class btSerializer* seriali
 {
 		btMultiBodyData* mbd = (btMultiBodyData*) dataBuffer;
 		getBaseWorldTransform().serialize(mbd->m_baseWorldTransform);
-		mbd->m_baseMass = (float) this->getBaseMass();
+		mbd->m_baseMass = this->getBaseMass();
 		getBaseInertia().serialize(mbd->m_baseInertia);
 		{
 			char* name = (char*) serializer->findNameForPointer(m_baseName);
@@ -1961,10 +1961,10 @@ const char*	btMultiBody::serialize(void* dataBuffer, class btSerializer* seriali
 				memPtr->m_posVarCount = getLink(i).m_posVarCount;
 				
 				getLink(i).m_inertiaLocal.serialize(memPtr->m_linkInertia);
-				memPtr->m_linkMass = (float) getLink(i).m_mass;
+				memPtr->m_linkMass = getLink(i).m_mass;
 				memPtr->m_parentIndex = getLink(i).m_parent;
-				memPtr->m_jointDamping = (float) getLink(i).m_jointDamping;
-				memPtr->m_jointFriction = (float) getLink(i).m_jointFriction;
+				memPtr->m_jointDamping = getLink(i).m_jointDamping;
+				memPtr->m_jointFriction = getLink(i).m_jointFriction;
 
 				getLink(i).m_eVector.serialize(memPtr->m_parentComToThisComOffset);
 				getLink(i).m_dVector.serialize(memPtr->m_thisPivotToThisComOffset);
@@ -1975,14 +1975,14 @@ const char*	btMultiBody::serialize(void* dataBuffer, class btSerializer* seriali
 					getLink(i).getAxisBottom(dof).serialize(memPtr->m_jointAxisBottom[dof]);
 					getLink(i).getAxisTop(dof).serialize(memPtr->m_jointAxisTop[dof]);
 					
-					memPtr->m_jointTorque[dof] = (float) getLink(i).m_jointTorque[dof];
-					memPtr->m_jointVel[dof] = (float) getJointVelMultiDof(i)[dof];
+					memPtr->m_jointTorque[dof] = getLink(i).m_jointTorque[dof];
+					memPtr->m_jointVel[dof] = getJointVelMultiDof(i)[dof];
 
 				}
 				int numPosVar = getLink(i).m_posVarCount;
 				for (int posvar = 0; posvar < numPosVar;posvar++)
 				{
-					memPtr->m_jointPos[posvar] = (float) getLink(i).m_jointPos[posvar];
+					memPtr->m_jointPos[posvar] = getLink(i).m_jointPos[posvar];
 				}
 				
 				

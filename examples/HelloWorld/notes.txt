@@ -1,2 +1,0 @@
-cmake -DBULLET_PHYSICS_SOURCE_DIR="../../" . && make && ./App_HelloWorld 
-

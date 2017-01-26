@@ -1,6 +1,6 @@
 
 	function findOpenCL_clew()
-		return false;
+		return true;
 	end
 
 	function findOpenCL_Apple()
